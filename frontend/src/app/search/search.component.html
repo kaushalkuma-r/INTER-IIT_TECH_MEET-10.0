@@ -1,0 +1,49 @@
+<input class="form-control form-control-lg search-input"
+       type="text"
+       [(ngModel)]="searchTerm"
+       placeholder="Search by company name"
+       (keydown)="search()">
+
+<div class="card recent-searchs-card">
+  <div class="card-body">
+    <div class="recent-searches" *ngIf="!searchTerm">
+      <h5 style="margin-bottom: 10px;">Most Viewed</h5>
+      <div class="container">
+        <div class="row">
+          <company-card [companyName]="result.Name" [cik]="result.CIK_Number" *ngFor="let result of mostViewed"></company-card>
+        </div>
+      </div>
+    </div>
+    <div class="results" *ngIf="searchTerm">
+      <h5 style="margin-bottom: 10px;">Results</h5>
+      <h5 *ngIf="!results.length">No results found</h5>
+      <div class="container">
+        <div class="row">
+            <company-card [companyName]="result.Name" [cik]="result.CIK_Number" *ngFor="let result of results"></company-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-input {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #555;
+  }
+  .search-input::placeholder {
+    font-size: 1.0rem;
+    color: #999;
+  }
+
+  .recent-searchs-card {
+    width: 80%;
+    margin: 30px auto;
+  }
+
+  .recent-searchs-card > .card-body {
+    padding: 0;
+  }
+</style>
